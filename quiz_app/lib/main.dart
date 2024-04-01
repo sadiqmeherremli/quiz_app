@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quiz_app/Pages/login_page.dart';
 import 'package:quiz_app/Pages/quiz_page.dart';
+import 'package:quiz_app/Provider/login_provider.dart';
+import 'package:quiz_app/Provider/quiz_provider.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (context) => LoginProvider(),), ChangeNotifierProvider(
+      create: (context) => QuizProvider() ,
+    )],
+    
+    child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF673AB7)),
         useMaterial3: true,
       ),
-      home:  AppView()
+      home: const QuizPage() 
     );
   }
 }
